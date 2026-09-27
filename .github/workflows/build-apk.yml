@@ -1,0 +1,41 @@
+name: Build Offshore English APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Projeyi al
+        uses: actions/checkout@v4
+
+      - name: ZIP dosyasını aç
+        run: unzip Offshore_English_Android_Project.zip
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: APK oluştur
+        run: gradle -p OffshoreEnglishAndroid :app:assembleDebug
+
+      - name: APK dosyasını kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: Offshore-English-APK
+          path: OffshoreEnglishAndroid/app/build/outputs/apk/debug/app-debug.apk
