@@ -18,8 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: ZIP dosyasını aç
-        run: unzip Offshore_English_Android_Project.zip
-
+        run: unzip Offshore_English_V2_Professional.zip
       - name: Java 17 kur
         uses: actions/setup-java@v4
         with:
